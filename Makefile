@@ -1,4 +1,17 @@
-all:
-	g++ -std=c++20 main.cpp -o a.out
+CXX = g++
+CXXFLAGS = -std=c++20 -g
+MAIN_SOURCES = main.cpp
+TEST_SOURCES = tests.cpp
+EXECUTABLE = a.out
+TEST_EXECUTABLE = tests
+
+all: $(EXECUTABLE) $(TEST_EXECUTABLE)
+
+$(EXECUTABLE): $(MAIN_SOURCES)
+	$(CXX) $(CXXFLAGS) $(MAIN_SOURCES) -o $(EXECUTABLE)
+
+$(TEST_EXECUTABLE): $(TEST_SOURCES)
+	$(CXX) $(CXXFLAGS) $(TEST_SOURCES) -o $(TEST_EXECUTABLE)
+
 clean:
-	rm a.out
+	rm -f $(EXECUTABLE) $(TEST_EXECUTABLE)
