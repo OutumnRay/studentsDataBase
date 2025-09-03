@@ -18,4 +18,4 @@ jobs:
     - name: make
       run: make
     - name: execute
-      run: ./main.cpp
+      run: tests.cpp
