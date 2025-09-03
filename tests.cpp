@@ -1,5 +1,4 @@
 #include <gtest/gtest.h>
-#include "student_database.h"
 #include <iostream>
 #include <vector>
 #include <string>
