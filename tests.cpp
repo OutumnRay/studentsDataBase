@@ -43,10 +43,9 @@ void displayStudents(const std::vector<Student>& database) {
 }
 
 // Функция для поиска студента с наименьшим и наибольшим баллом
-void findMinMaxGPA(const std::vector<Student>& database) {
+std::pair<Student, Student> findMinMaxGPA(const std::vector<Student>& database) {
     if (database.empty()) {
-        std::cout << "Список студентов пуст.\n";
-        return;
+        throw std::runtime_error("Список студентов пуст");
     }
 
     double minGPA = std::numeric_limits<double>::max();
@@ -65,18 +64,9 @@ void findMinMaxGPA(const std::vector<Student>& database) {
         }
     }
 
-    std::cout << "Студент с наименьшим баллом:\n";
-    std::cout << "Имя: " << minStudent.name << "\n";
-    std::cout << "Возраст: " << minStudent.age << "\n";
-    std::cout << "Специальность: " << minStudent.major << "\n";
-    std::cout << "Средний балл: " << minStudent.gpa << "\n\n";
-
-    std::cout << "Студент с наибольшим баллом:\n";
-    std::cout << "Имя: " << maxStudent.name << "\n";
-    std::cout << "Возраст: " << maxStudent.age << "\n";
-    std::cout << "Специальность: " << maxStudent.major << "\n";
-    std::cout << "Средний балл: " << maxStudent.gpa << "\n\n";
+    return {minStudent, maxStudent};
 }
+
 
 class StudentDatabaseTest : public ::testing::Test {
 protected:
