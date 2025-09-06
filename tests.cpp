@@ -27,6 +27,10 @@ void addStudent(std::vector<Student>& database) {
     std::cout << "Студент добавлен в базу данных.\n";
 }
 
+void addStudent(std::vector<Student>& database, const Student& student) {
+    database.push_back(student);
+}
+
 // Функция для вывода всех студентов из базы данных
 void displayStudents(const std::vector<Student>& database) {
     std::cout << "Список студентов:\n";
