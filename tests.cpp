@@ -43,9 +43,9 @@ void displayStudents(const std::vector<Student>& database) {
 }
 
 // Функция для поиска студента с наименьшим и наибольшим баллом
-std::pair<Student, Student> findMinMaxGPA(const std::vector<Student>& database) {
+std::optional<std::pair<Student, Student>> findMinMaxGPA(const std::vector<Student>& database) {
     if (database.empty()) {
-        throw std::runtime_error("Список студентов пуст");
+        return std::nullopt;
     }
 
     double minGPA = std::numeric_limits<double>::max();
@@ -64,8 +64,9 @@ std::pair<Student, Student> findMinMaxGPA(const std::vector<Student>& database) 
         }
     }
 
-    return {minStudent, maxStudent};
+    return std::make_pair(minStudent, maxStudent);
 }
+
 
 
 class StudentDatabaseTest : public ::testing::Test {
