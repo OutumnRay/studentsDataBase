@@ -43,9 +43,9 @@ void displayStudents(const std::vector<Student>& database) {
 }
 
 // Функция для поиска студента с наименьшим и наибольшим баллом
-std::optional<std::pair<Student, Student>> findMinMaxGPA(const std::vector<Student>& database) {
+std::pair<Student, Student> findMinMaxGPA(const std::vector<Student>& database) {
     if (database.empty()) {
-        return std::nullopt;
+        throw std::runtime_error("Список студентов пуст");
     }
 
     double minGPA = std::numeric_limits<double>::max();
@@ -64,7 +64,7 @@ std::optional<std::pair<Student, Student>> findMinMaxGPA(const std::vector<Stude
         }
     }
 
-    return std::make_pair(minStudent, maxStudent);
+    return {minStudent, maxStudent};
 }
 
 
@@ -130,11 +130,12 @@ TEST_F(StudentDatabaseTest, MultipleAddStudentsTest) {
 
 // Тест на работу с пустой базой данных
 TEST_F(StudentDatabaseTest, EmptyDatabaseTest) {
-    auto [minStudent, maxStudent] = findMinMaxGPA(database);
+    std::vector<Student> database;
 
-    ASSERT_EQ(minStudent.gpa, 0); 
-    ASSERT_EQ(maxStudent.gpa, 0);
+    // Проверяем, что при пустой базе выбрасывается исключение
+    EXPECT_THROW(findMinMaxGPA(database), std::runtime_error);
 }
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
